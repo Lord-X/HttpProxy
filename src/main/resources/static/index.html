@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        let HttpProxy = {};
+        HttpProxy.socket = null;
+        HttpProxy.connect = (function (host) {
+            if ("WebSocket" in window) {
+                HttpProxy.socket = new WebSocket(host);
+            } else if ("MozWebSocket" in window) {
+                HttpProxy.socket = new MozWebSocket(host);
+            } else {
+                console.log("not support web socket");
+                return;
+            }
+            
+            HttpProxy.socket.onopen = function () {
+                document.getElementById("hhh").innerText = "server connected";
+            };
+
+            HttpProxy.socket.onclose = function () {
+                document.getElementById("hhh").innerText = "connection closed";
+            };
+
+            HttpProxy.socket.onmessage = function (message) {
+                document.getElementById("hhh").innerText = message;
+            };
+        })
+    </script>
+</head>
+<body>
+
+<span id="hhh"></span>
+
+</body>
+</html>
