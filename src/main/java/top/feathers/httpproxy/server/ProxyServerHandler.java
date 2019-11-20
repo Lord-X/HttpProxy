@@ -3,6 +3,8 @@ package top.feathers.httpproxy.server;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import org.springframework.web.socket.TextMessage;
+import top.feathers.httpproxy.endpoint.WSHandler;
 
 /**
  * Description:
@@ -17,6 +19,9 @@ public class ProxyServerHandler extends ChannelHandlerAdapter {
         buf.readBytes(req);
         String body = new String(req, "UTF-8");
         System.out.println("message = " + body);
+        if (WSHandler.getWebSocketSession() != null) {
+            WSHandler.getWebSocketSession().sendMessage(new TextMessage(body));
+        }
     }
 
     @Override
