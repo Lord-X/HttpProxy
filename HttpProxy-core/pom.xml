@@ -17,6 +17,11 @@
             <artifactId>HttpProxy-extension</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>top.feathers</groupId>
+            <artifactId>HttpProxy-parser-http</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>

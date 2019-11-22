@@ -12,6 +12,8 @@ import top.feathers.httpproxy.extension.parser.RequestParser;
  */
 public class HttpRequestParser implements RequestParser {
     public ProxyRequest parseRequest(String body) {
-        return null;
+        ProxyRequest request = new ProxyRequest();
+        request.setBody(body);
+        return request;
     }
 }

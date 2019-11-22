@@ -48,7 +48,7 @@ hs_err_pid*
 /.tgitconfig
 
 
-*/target/
+*/target/*
 
 
 .DS_Store

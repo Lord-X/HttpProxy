@@ -5,6 +5,12 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.springframework.web.socket.TextMessage;
 import top.feathers.httpproxy.core.endpoint.WSHandler;
+import top.feathers.httpproxy.extension.parser.ProxyRequest;
+import top.feathers.httpproxy.extension.parser.RequestParser;
+
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
 /**
  * Description:
@@ -19,8 +25,14 @@ public class ProxyServerHandler extends ChannelHandlerAdapter {
         buf.readBytes(req);
         String body = new String(req, "UTF-8");
         System.out.println("message = " + body);
-        if (WSHandler.getWebSocketSession() != null) {
-            WSHandler.getWebSocketSession().sendMessage(new TextMessage(body));
+        ServiceLoader<RequestParser> loader = ServiceLoader.load(RequestParser.class);
+        Iterator<RequestParser> iterator = loader.iterator();
+        if (iterator.hasNext()) {
+            RequestParser parser = iterator.next();
+            ProxyRequest request = parser.parseRequest(body);
+            if (WSHandler.getWebSocketSession() != null) {
+                WSHandler.getWebSocketSession().sendMessage(new TextMessage(request.getBody()));
+            }
         }
     }
 
