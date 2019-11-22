@@ -4,9 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <groupId>top.feathers</groupId>
     <artifactId>HttpProxy</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
+    <modules>
+        <module>HttpProxy-core</module>
+        <module>HttpProxy-parser</module>
+        <module>HttpProxy-extension</module>
+        <module>HttpProxy-transfer</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -51,7 +58,5 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.62</version>
         </dependency>
-
-
     </dependencies>
 </project>
